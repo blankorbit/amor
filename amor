@@ -2,8 +2,6 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-
-    <!-- Adaptación para celulares -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Para Angelina 💗</title>
@@ -15,25 +13,34 @@
             padding: 0;
         }
 
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
         body {
             min-height: 100vh;
             overflow: hidden;
-            font-family: Georgia, "Times New Roman", serif;
 
-            background:
-                radial-gradient(circle at center,
-                #fff0f7 0%,
-                #ffd6e8 45%,
-                #ffb6d5 100%);
+            font-family: Georgia, "Times New Roman", serif;
 
             display: flex;
             justify-content: center;
             align-items: center;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #fff8fc 0%,
+                    #ffd9e9 45%,
+                    #ffb6d5 100%
+                );
         }
 
-        /* =========================================
-           FONDO DE CORAZONES
-        ========================================= */
+        /* ==========================================
+           FONDO
+        ========================================== */
 
         #corazones {
             position: fixed;
@@ -43,49 +50,62 @@
             z-index: 0;
         }
 
+        /* ==========================================
+           CORAZONES DEL FONDO
+        ========================================== */
+
         .corazon-fondo {
             position: absolute;
-            width: 30px;
-            height: 30px;
+
+            width: 24px;
+            height: 24px;
+
+            background: #ff69b4;
 
             transform: rotate(-45deg);
 
+            border-radius: 4px;
+
+            opacity: 0.7;
+
             animation:
-                flotar linear infinite,
+                subir linear forwards,
                 balancear ease-in-out infinite alternate;
         }
 
         .corazon-fondo::before,
         .corazon-fondo::after {
             content: "";
+
             position: absolute;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+
+            width: 24px;
+            height: 24px;
+
             background: inherit;
+
+            border-radius: 50%;
         }
 
         .corazon-fondo::before {
-            top: -15px;
+            top: -12px;
             left: 0;
         }
 
         .corazon-fondo::after {
             top: 0;
-            left: 15px;
+            left: 12px;
         }
 
-        @keyframes flotar {
+        @keyframes subir {
             from {
-                transform:
-                    translateY(110vh)
-                    rotate(-45deg);
+                bottom: -80px;
+                transform: rotate(-45deg);
             }
 
             to {
-                transform:
-                    translateY(-120px)
-                    rotate(-45deg);
+                bottom: 110vh;
+                transform: rotate(-45deg);
             }
         }
 
@@ -99,58 +119,66 @@
             }
         }
 
-        /* =========================================
-           CONTENEDOR
-        ========================================= */
+        /* ==========================================
+           CONTENEDOR PRINCIPAL
+        ========================================== */
 
         .contenedor {
             position: relative;
+
             z-index: 2;
 
-            width: min(90vw, 700px);
+            width: min(92vw, 720px);
 
             text-align: center;
         }
 
-        /* =========================================
+        /* ==========================================
            TITULO
-        ========================================= */
+        ========================================== */
 
         .titulo {
-            margin-bottom: 25px;
-
-            font-size: clamp(2.2rem, 7vw, 4rem);
+            margin-bottom: 8px;
 
             color: #d52d79;
+
+            font-size: clamp(
+                2.3rem,
+                8vw,
+                4rem
+            );
 
             font-style: italic;
 
             text-shadow:
-                0 0 5px #fff,
+                0 0 5px white,
                 0 0 15px #ff8fc1,
-                0 0 25px #ff69b4;
+                0 0 30px #ff69b4;
         }
 
         .subtitulo {
-            margin-top: -15px;
             margin-bottom: 25px;
 
-            color: #a93465;
+            color: #a93668;
 
-            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            font-size: clamp(
+                0.9rem,
+                3vw,
+                1.2rem
+            );
 
             font-style: italic;
         }
 
-        /* =========================================
+        /* ==========================================
            CARTA
-        ========================================= */
+        ========================================== */
 
         .carta {
             position: relative;
 
             width: 100%;
-            min-height: 400px;
+            min-height: 420px;
 
             padding: 45px 35px;
 
@@ -161,100 +189,161 @@
                     #fff0f7
                 );
 
-            border-radius: 8px;
+            border-radius: 12px;
 
             border: 5px solid #ff69b4;
 
             box-shadow:
-                0 0 10px #ff69b4,
-                0 0 25px #ff8fc1,
-                0 20px 50px rgba(150, 40, 90, 0.25);
-
-            transition:
-                transform 0.8s ease,
-                opacity 0.8s ease,
-                box-shadow 0.4s ease;
+                0 0 8px #ff69b4,
+                0 0 20px #ff69b4,
+                0 0 45px #ff9ccc,
+                0 20px 50px rgba(
+                    120,
+                    40,
+                    80,
+                    0.25
+                );
 
             overflow: hidden;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.5s ease,
+                box-shadow 0.5s ease;
+
+            animation: led 4s infinite linear;
         }
 
-        /* Borde interior */
+        @keyframes led {
 
-        .carta::before {
-            content: "";
+            0% {
+                border-color: #ff4f9a;
 
+                box-shadow:
+                    0 0 8px #ff4f9a,
+                    0 0 20px #ff4f9a,
+                    0 0 40px #ff9ccc;
+            }
+
+            25% {
+                border-color: #ff8ac4;
+
+                box-shadow:
+                    0 0 8px #ff8ac4,
+                    0 0 20px #ff8ac4,
+                    0 0 40px #ffc1df;
+            }
+
+            50% {
+                border-color: #d96cff;
+
+                box-shadow:
+                    0 0 8px #d96cff,
+                    0 0 20px #d96cff,
+                    0 0 40px #edbaff;
+            }
+
+            75% {
+                border-color: #ff72b6;
+
+                box-shadow:
+                    0 0 8px #ff72b6,
+                    0 0 20px #ff72b6,
+                    0 0 40px #ffb6d9;
+            }
+
+            100% {
+                border-color: #ff4f9a;
+
+                box-shadow:
+                    0 0 8px #ff4f9a,
+                    0 0 20px #ff4f9a,
+                    0 0 40px #ff9ccc;
+            }
+        }
+
+        .carta:hover {
+            transform: scale(1.015);
+        }
+
+        /* ==========================================
+           BORDE INTERIOR
+        ========================================== */
+
+        .borde-interior {
             position: absolute;
+
             inset: 12px;
 
             border: 2px solid #ffc1dc;
 
             pointer-events: none;
+
+            z-index: 10;
         }
 
-        /* =========================================
-           CARTA CERRADA
-        ========================================= */
-
-        .carta.cerrada {
-            cursor: pointer;
-        }
-
-        .carta.cerrada:hover {
-            transform: scale(1.02);
-        }
+        /* ==========================================
+           SOBRE
+        ========================================== */
 
         .sobre {
             position: absolute;
 
             inset: 0;
 
+            z-index: 4;
+
             background:
                 linear-gradient(
                     135deg,
-                    #ffe3ef,
-                    #fff5fa
+                    #ffe0ed,
+                    #fff4f9
                 );
+
+            transition:
+                transform 1s ease,
+                opacity 0.8s ease;
 
             clip-path: polygon(
                 0 0,
                 100% 0,
-                50% 55%
+                50% 58%
             );
-
-            transition: transform 1s ease;
-
-            z-index: 3;
         }
+
+        /* ==========================================
+           CORAZON CENTRAL
+        ========================================== */
 
         .corazon-boton {
             position: absolute;
 
             left: 50%;
-            top: 52%;
+            top: 53%;
 
-            transform: translate(-50%, -50%);
+            width: 75px;
+            height: 75px;
 
-            width: 95px;
-            height: 95px;
+            z-index: 7;
 
             background: #ff4f9a;
 
-            transform-origin: center;
+            border-radius: 8px;
 
-            rotate: -45deg;
-
-            border-radius: 10px;
+            transform:
+                translate(-50%, -50%)
+                rotate(-45deg);
 
             box-shadow:
-                0 0 10px #ff69b4,
+                0 0 10px #ff4f9a,
                 0 0 25px #ff69b4,
                 0 0 45px #ffb6d9;
 
-            z-index: 5;
-
-            cursor: pointer;
-
             animation: latido 1.2s infinite;
+
+            transition:
+                opacity 0.5s ease;
         }
 
         .corazon-boton::before,
@@ -263,8 +352,8 @@
 
             position: absolute;
 
-            width: 95px;
-            height: 95px;
+            width: 75px;
+            height: 75px;
 
             background: #ff4f9a;
 
@@ -272,99 +361,122 @@
         }
 
         .corazon-boton::before {
-            top: -47px;
+            top: -37px;
             left: 0;
         }
 
         .corazon-boton::after {
-            left: 47px;
             top: 0;
+            left: 37px;
         }
 
         @keyframes latido {
-            0%, 100% {
+
+            0%,
+            100% {
                 scale: 1;
             }
 
             50% {
-                scale: 1.1;
+                scale: 1.12;
             }
         }
+
+        /* ==========================================
+           TEXTO DEL BOTON
+        ========================================== */
 
         .texto-boton {
             position: absolute;
 
             left: 50%;
-            top: 52%;
+            top: 53%;
 
-            transform: translate(-50%, -50%);
+            transform:
+                translate(-50%, -50%);
 
-            z-index: 6;
+            width: 190px;
 
-            width: 170px;
+            z-index: 8;
 
             color: white;
 
+            font-size: 0.9rem;
+
             font-weight: bold;
 
-            font-size: 0.95rem;
-
             text-shadow:
-                0 1px 3px #a51c5c;
+                0 2px 4px #a51c5c;
 
             pointer-events: none;
+
+            transition:
+                opacity 0.4s ease;
         }
 
-        /* =========================================
+        /* ==========================================
            CONTENIDO DE LA CARTA
-        ========================================= */
+        ========================================== */
 
         .contenido {
             position: relative;
 
-            z-index: 2;
+            z-index: 3;
+
+            min-height: 320px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
 
             opacity: 0;
 
-            transform: translateY(20px);
+            transform:
+                translateY(30px);
 
             transition:
-                opacity 1s ease 0.7s,
-                transform 1s ease 0.7s;
+                opacity 0.8s ease 0.6s,
+                transform 0.8s ease 0.6s;
 
             pointer-events: none;
         }
 
         .contenido h2 {
-            margin-bottom: 30px;
+            margin-bottom: 28px;
 
             color: #d52d79;
 
             font-size: clamp(
                 1.5rem,
                 5vw,
-                2.2rem
+                2.3rem
             );
 
             font-style: italic;
         }
 
         .mensaje {
+            max-width: 580px;
+
             color: #843454;
 
             font-size: clamp(
-                1.05rem,
+                1rem,
                 3vw,
-                1.35rem
+                1.3rem
             );
 
-            line-height: 1.9;
+            line-height: 1.8;
 
             font-style: italic;
         }
 
         .firma {
-            margin-top: 30px;
+            margin-top: 25px;
 
             color: #d52d79;
 
@@ -373,70 +485,22 @@
             font-style: italic;
         }
 
-        /* =========================================
-           ESTADO ABIERTO
-        ========================================= */
-
-        .carta.abierta {
-            cursor: default;
-
-            transform: scale(1);
-
-            animation: aparecerCarta 1s ease;
-        }
-
-        @keyframes aparecerCarta {
-            0% {
-                transform: scale(0.85);
-            }
-
-            60% {
-                transform: scale(1.04);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .carta.abierta .sobre {
-            transform: translateY(-110%);
-        }
-
-        .carta.abierta .corazon-boton {
-            opacity: 0;
-
-            pointer-events: none;
-
-            transition: opacity 0.5s ease;
-        }
-
-        .carta.abierta .texto-boton {
-            opacity: 0;
-
-            transition: opacity 0.3s ease;
-        }
-
-        .carta.abierta .contenido {
-            opacity: 1;
-
-            transform: translateY(0);
-
-            pointer-events: auto;
-        }
-
-        /* =========================================
+        /* ==========================================
            CORAZONES DECORATIVOS
-        ========================================= */
+        ========================================== */
 
         .mini-corazon {
             position: absolute;
 
-            font-size: 24px;
+            z-index: 11;
 
             color: #ff69b4;
 
+            font-size: 25px;
+
             animation: brillo 1.5s infinite alternate;
+
+            pointer-events: none;
         }
 
         .mini1 {
@@ -460,22 +524,55 @@
         }
 
         @keyframes brillo {
+
             from {
                 opacity: 0.4;
-
                 transform: scale(0.8);
             }
 
             to {
                 opacity: 1;
-
-                transform: scale(1.2);
+                transform: scale(1.15);
             }
         }
 
-        /* =========================================
+        /* ==========================================
+           CARTA ABIERTA
+        ========================================== */
+
+        .carta.abierta {
+            cursor: default;
+
+            transform: scale(1);
+        }
+
+        .carta.abierta .sobre {
+            transform: translateY(-110%);
+
+            opacity: 0;
+        }
+
+        .carta.abierta .corazon-boton {
+            opacity: 0;
+
+            pointer-events: none;
+        }
+
+        .carta.abierta .texto-boton {
+            opacity: 0;
+        }
+
+        .carta.abierta .contenido {
+            opacity: 1;
+
+            transform: translateY(0);
+
+            pointer-events: auto;
+        }
+
+        /* ==========================================
            CELULAR
-        ========================================= */
+        ========================================== */
 
         @media (max-width: 600px) {
 
@@ -483,8 +580,12 @@
                 padding: 15px;
             }
 
+            .contenedor {
+                width: 94vw;
+            }
+
             .titulo {
-                margin-bottom: 15px;
+                margin-bottom: 5px;
             }
 
             .subtitulo {
@@ -495,36 +596,43 @@
                 min-height: 430px;
 
                 padding:
-                    40px 20px;
+                    35px 18px;
+            }
+
+            .contenido {
+                min-height: 350px;
             }
 
             .mensaje {
-                line-height: 1.7;
+                line-height: 1.65;
             }
 
             .corazon-boton {
-                width: 80px;
-                height: 80px;
+                width: 65px;
+                height: 65px;
             }
 
             .corazon-boton::before,
             .corazon-boton::after {
-                width: 80px;
-                height: 80px;
+                width: 65px;
+                height: 65px;
             }
 
             .corazon-boton::before {
-                top: -40px;
+                top: -32px;
             }
 
             .corazon-boton::after {
-                left: 40px;
+                left: 32px;
             }
 
             .texto-boton {
-                font-size: 0.82rem;
+                width: 155px;
+                font-size: 0.78rem;
+            }
 
-                width: 145px;
+            .mini-corazon {
+                font-size: 20px;
             }
         }
     </style>
@@ -532,8 +640,16 @@
 
 <body>
 
-    <!-- Corazones del fondo -->
+    <!-- ==========================================
+         CORAZONES DEL FONDO
+    =========================================== -->
+
     <div id="corazones"></div>
+
+
+    <!-- ==========================================
+         CONTENIDO PRINCIPAL
+    =========================================== -->
 
     <main class="contenedor">
 
@@ -545,14 +661,24 @@
             💗 Una pequeña carta para ti 💗
         </p>
 
+
+        <!-- ======================================
+             CARTA
+        ======================================= -->
+
         <section
-            class="carta cerrada"
+            class="carta"
             id="carta"
             onclick="abrirCarta()"
         >
 
-            <!-- Parte del sobre -->
+            <!-- Borde interior -->
+            <div class="borde-interior"></div>
+
+
+            <!-- Sobre cerrado -->
             <div class="sobre"></div>
+
 
             <!-- Decoraciones -->
             <span class="mini-corazon mini1">♥</span>
@@ -560,14 +686,24 @@
             <span class="mini-corazon mini3">♥</span>
             <span class="mini-corazon mini4">♥</span>
 
-            <!-- Corazón que se pulsa -->
-            <div class="corazon-boton"></div>
 
+            <!-- Corazón para abrir -->
+            <div
+                class="corazon-boton"
+                aria-label="Abrir carta"
+            ></div>
+
+
+            <!-- Texto del botón -->
             <div class="texto-boton">
                 MACHUCA PARA ABRIR
             </div>
 
-            <!-- Texto de la carta -->
+
+            <!-- ==================================
+                 MENSAJE
+            =================================== -->
+
             <div class="contenido">
 
                 <h2>
@@ -593,13 +729,14 @@
 
     </main>
 
+
     <script>
 
-        /* =========================================
-           CREAR CORAZONES DEL FONDO
-        ========================================= */
+        /* ==========================================
+           CORAZONES DEL FONDO
+        =========================================== */
 
-        const contenedorCorazones =
+        const contenedor =
             document.getElementById("corazones");
 
         const colores = [
@@ -610,26 +747,46 @@
             "#ffb6d9"
         ];
 
+
         function crearCorazon() {
 
             const corazon =
                 document.createElement("div");
 
-            corazon.classList.add(
-                "corazon-fondo"
-            );
+            corazon.className =
+                "corazon-fondo";
+
+
+            /* Tamaño aleatorio */
 
             const tamano =
                 Math.random() * 25 + 15;
 
-            const posicion =
-                Math.random() * 100;
+            corazon.style.width =
+                tamano + "px";
+
+            corazon.style.height =
+                tamano + "px";
+
+
+            /* Posición horizontal */
+
+            corazon.style.left =
+                Math.random() * 100 + "%";
+
+
+            /* Velocidad */
 
             const duracion =
-                Math.random() * 8 + 7;
+                Math.random() * 8 + 8;
 
-            const balanceo =
-                Math.random() * 2 + 1;
+
+            corazon.style.animationDuration =
+                duracion + "s, " +
+                (Math.random() * 2 + 1) + "s";
+
+
+            /* Color */
 
             const color =
                 colores[
@@ -639,43 +796,46 @@
                     )
                 ];
 
-            corazon.style.width =
-                tamano + "px";
-
-            corazon.style.height =
-                tamano + "px";
-
-            corazon.style.left =
-                posicion + "%";
-
             corazon.style.background =
                 color;
 
-            corazon.style.animationDuration =
-                duracion + "s, " +
-                balanceo + "s";
+
+            /* Transparencia */
 
             corazon.style.opacity =
-                Math.random() * 0.45 + 0.35;
+                Math.random() * 0.5 + 0.3;
 
-            contenedorCorazones.appendChild(
+
+            /* Agregar */
+
+            contenedor.appendChild(
                 corazon
             );
 
-            setTimeout(() => {
 
-                corazon.remove();
+            /* Eliminar cuando termine */
 
-            }, duracion * 1000);
+            setTimeout(
+                () => {
+                    corazon.remove();
+                },
+                duracion * 1000
+            );
         }
 
-        /* Crear varios inicialmente */
 
-        for (let i = 0; i < 35; i++) {
+        /* Crear corazones iniciales */
+
+        for (
+            let i = 0;
+            i < 35;
+            i++
+        ) {
             crearCorazon();
         }
 
-        /* Crear nuevos continuamente */
+
+        /* Crear continuamente */
 
         setInterval(
             crearCorazon,
@@ -683,9 +843,9 @@
         );
 
 
-        /* =========================================
+        /* ==========================================
            ABRIR CARTA
-        ========================================= */
+        =========================================== */
 
         function abrirCarta() {
 
@@ -693,6 +853,9 @@
                 document.getElementById(
                     "carta"
                 );
+
+
+            /* Evitar abrir otra vez */
 
             if (
                 carta.classList.contains(
@@ -702,9 +865,8 @@
                 return;
             }
 
-            carta.classList.remove(
-                "cerrada"
-            );
+
+            /* Abrir */
 
             carta.classList.add(
                 "abierta"
